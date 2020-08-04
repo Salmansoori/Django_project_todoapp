@@ -2,12 +2,15 @@ from django.shortcuts import render,redirect
 from django.views.decorators.http import require_POST
 from .models import Todo
 from .forms import TodoForm
+import datetime
 # Create your views here.
 def index(request):
     todo_list = Todo.objects.order_by('id')
+    
+    mydate=datetime.datetime.today()
 
     form=TodoForm()
-    context={'todo_list':todo_list, 'form':form}
+    context={'todo_list':todo_list, 'form':form , 'mydate':mydate}
 
     return render(request, 'todo/index.html', context)
 
